@@ -1,0 +1,38 @@
+<form class="form action-container-wide" [formGroup]="mappingFieldsFormGroup">
+    <div class="table-responsive">
+      <table class="table-styled width100">        
+        <tbody>
+          <tr *ngFor="let csvColumnItem of csvColumnItems">
+            <td>
+               {{ csvColumnItem.name }}
+              <div class="subheader" matTooltip="{{ csvColumnItem.preview }}" matTooltipShowDelay="500">{{ csvColumnItem.preview }}</div>
+            </td>
+            <td>
+              <das-dropdown [formControlName]="csvColumnItem.id" 
+                  [items]="mappingFieldsItems" 
+                  [displayedProperty]="'fieldName'" 
+                  [defaultValue]="'DoNotMap'" 
+                  [placeholder]="'DashworksField'" 
+                  [dividerNeeded]="true"
+                  [hintErrorLabel]="getErrorMessage(csvColumnItem.id)">
+                  <ng-template #customOption="" let-item="" let-displayValue="displayValue">
+                    <custom-option [item]="item" [isShowIcon]="isShowIcon(item)" [displayValue]="displayValue"></custom-option>
+                  </ng-template>
+                  <!-- <ng-template #customOption="" let-item="" let-displayValue="displayValue">
+                    <mat-option [value]="item" role="option">
+                      <mat-icon *ngIf="isShowIcon(item)">vpn_key</mat-icon> {{ displayValue }}
+                    </mat-option>
+                  </ng-template>                                                                     -->
+              </das-dropdown>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </form>
+<hr>
+mappingFieldsFormGroup: {{ mappingFieldsFormGroup.valid }}
+
+
+<ng-template #defaultOption=""> 
+</ng-template>
